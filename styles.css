@@ -1,0 +1,673 @@
+@font-face {
+  font-family: "Invitation Nastaliq";
+  src: url("IranNastaliq.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --ink: #4b3431;
+  --wine: #6d3037;
+  --wine-deep: #4e242a;
+  --rose: #8ca48c;
+  --gold: #b88943;
+  --cream: #f8f0df;
+  --paper: #fffaf0;
+  --envelope: #64856b;
+  --envelope-dark: #46634f;
+  --envelope-light: #8ca48c;
+  --shadow: rgba(17, 35, 25, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #142c23;
+  color: var(--ink);
+  font-family: Tahoma, sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.experience {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(228, 238, 208, 0.2), transparent 34%),
+    linear-gradient(145deg, #183529 0%, #345642 48%, #142c23 100%);
+}
+
+.experience::before,
+.experience::after {
+  position: absolute;
+  z-index: -1;
+  width: min(72vw, 620px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(226, 188, 118, 0.16);
+  border-radius: 50%;
+  content: "";
+}
+
+.experience::before {
+  top: -32%;
+  right: -16%;
+}
+
+.experience::after {
+  bottom: -38%;
+  left: -20%;
+  transform: scale(1.25);
+}
+
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.35;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(210, 221, 171, 0.25), transparent 20%),
+    radial-gradient(circle at 86% 88%, rgba(120, 156, 121, 0.32), transparent 24%);
+}
+
+.petals {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.opening {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  width: min(92vw, 520px);
+  place-items: center;
+  padding: 28px 18px 48px;
+  text-align: center;
+  transition: opacity 550ms ease, transform 800ms cubic-bezier(.2,.8,.2,1);
+}
+
+.opening-kicker {
+  margin: 0 0 52px;
+  color: rgba(255, 244, 224, 0.78);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+}
+
+.envelope-trigger {
+  display: grid;
+  width: 100%;
+  border: 0;
+  outline-offset: 10px;
+  background: transparent;
+  color: inherit;
+  place-items: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.envelope-trigger:focus-visible {
+  outline: 2px solid #f5d697;
+}
+
+.envelope {
+  position: relative;
+  display: block;
+  width: min(78vw, 390px, calc((100svh - 210px) * 1.52));
+  aspect-ratio: 1.52;
+  perspective: 900px;
+  filter: drop-shadow(0 30px 38px rgba(10, 24, 16, 0.38));
+  transition: transform 450ms ease;
+}
+
+.envelope-trigger:hover .envelope {
+  transform: translateY(-4px);
+}
+
+.envelope-shadow {
+  position: absolute;
+  right: 9%;
+  bottom: -9%;
+  left: 9%;
+  height: 16%;
+  border-radius: 50%;
+  background: rgba(9, 22, 15, 0.32);
+  filter: blur(15px);
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 236, 214, 0.2);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 40%),
+    var(--envelope-dark);
+}
+
+.letter-preview {
+  position: absolute;
+  right: 7%;
+  bottom: 6%;
+  left: 7%;
+  display: grid;
+  height: 88%;
+  place-content: center;
+  border-radius: 4px 4px 2px 2px;
+  background:
+    linear-gradient(rgba(255, 251, 243, 0.82), rgba(255, 248, 235, 0.82)),
+    url("floral-paper-green.png") center / cover;
+  box-shadow: 0 4px 18px rgba(24, 43, 29, 0.24);
+  color: var(--wine);
+  transform: translateY(2%);
+  transition: transform 1.15s cubic-bezier(.18,.82,.3,1), box-shadow 900ms ease;
+}
+
+.envelope-flap {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 58%;
+  border-radius: 7px 7px 2px 2px;
+  background:
+    linear-gradient(170deg, rgba(255, 255, 255, 0.14), transparent 44%),
+    var(--envelope-light);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 900ms cubic-bezier(.35,.05,.25,1), z-index 0ms linear 430ms;
+}
+
+.envelope-pocket-left,
+.envelope-pocket-right,
+.envelope-pocket-bottom {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  border-radius: 7px;
+}
+
+.envelope-pocket-left {
+  background: linear-gradient(138deg, #78957b, #587860);
+  clip-path: polygon(0 0, 52% 52%, 0 100%);
+}
+
+.envelope-pocket-right {
+  background: linear-gradient(220deg, #7c997e, #52715a);
+  clip-path: polygon(100% 0, 48% 52%, 100% 100%);
+}
+
+.envelope-pocket-bottom {
+  background: linear-gradient(160deg, #759277, #4d6c55);
+  clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+}
+
+.wax-seal {
+  position: absolute;
+  z-index: 7;
+  top: 56%;
+  left: 50%;
+  display: block;
+  width: clamp(77px, 22vw, 104px);
+  aspect-ratio: 1;
+  filter: drop-shadow(1px 5px 5px rgba(49, 20, 24, 0.44));
+  transform: translate(-50%, -50%);
+  transition: opacity 280ms ease, transform 420ms ease;
+}
+
+.wax-seal img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.open-label {
+  display: grid;
+  gap: 5px;
+  margin-top: 52px;
+  color: #fff4df;
+}
+
+.open-label-main {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.open-label-sub {
+  color: rgba(255, 239, 216, 0.58);
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.invitation-card {
+  position: absolute;
+  z-index: 3;
+  top: calc(50% - 20px);
+  left: 50%;
+  width: min(88vw, 430px, calc((100svh - 112px) * .62));
+  aspect-ratio: 0.62;
+  overflow: clip;
+  border: 1px solid rgba(196, 142, 68, 0.62);
+  border-radius: 7px;
+  background:
+    linear-gradient(rgba(255, 252, 246, 0.16), rgba(255, 251, 241, 0.16)),
+    url("floral-paper-green.png") center / cover no-repeat;
+  box-shadow: 0 34px 80px rgba(10, 25, 16, 0.48), 0 0 0 6px rgba(255, 241, 216, 0.07);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 22%) scale(.53);
+  transform-origin: center bottom;
+  transition:
+    opacity 320ms ease 650ms,
+    transform 1.25s cubic-bezier(.17,.86,.22,1) 610ms;
+}
+
+.card-inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: radial-gradient(ellipse at 50% 54%, rgba(255, 251, 244, .94) 26%, rgba(255, 251, 244, .64) 48%, transparent 73%);
+}
+
+/* Six tightly cropped lines keep the original calligraphy. The stack sits
+   inside the paper's clear central area instead of over the corner flowers.
+   Every slice uses source x=80, w=480; y and h are recorded below. */
+.lettering-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 76%;
+  transform: translateY(-3%);
+  mix-blend-mode: multiply;
+}
+
+.reference-lettering {
+  position: absolute;
+  left: -16.6666666667%;
+  display: block;
+  width: 133.3333333333%;
+  max-width: none;
+  height: auto;
+}
+
+.lettering-slice {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  overflow: clip;
+}
+
+/* y=340, h=105 */
+.lettering-names {
+  aspect-ratio: 480 / 105;
+}
+
+.lettering-names .reference-lettering {
+  top: -323.8095238095%;
+}
+
+/* y=496, h=110 */
+.lettering-poem {
+  aspect-ratio: 480 / 110;
+}
+
+.lettering-poem .reference-lettering {
+  top: -450.9090909091%;
+}
+
+/* y=646, h=88 */
+.lettering-families {
+  aspect-ratio: 480 / 88;
+}
+
+.lettering-families .reference-lettering {
+  top: -734.0909090909%;
+}
+
+/* y=756, h=72 */
+.lettering-ceremony {
+  aspect-ratio: 480 / 72;
+}
+
+.lettering-ceremony .reference-lettering {
+  top: -1050%;
+}
+
+/* y=828, h=64 */
+.lettering-reception {
+  aspect-ratio: 480 / 64;
+}
+
+.lettering-reception .reference-lettering {
+  top: -1293.75%;
+}
+
+/* y=893, h=86 */
+.lettering-address {
+  aspect-ratio: 480 / 86;
+}
+
+.lettering-address .reference-lettering {
+  top: -1038.3720930233%;
+}
+
+.lettering-fine .reference-lettering {
+  filter: url("#fine-lettering");
+}
+
+.lettering-filters {
+  position: absolute;
+  pointer-events: none;
+}
+
+.poem {
+  margin: 10px 0 4px;
+  color: var(--wine-deep);
+  font-family: "Invitation Nastaliq", serif;
+  font-size: clamp(40px, 12vw, 57px);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.ornament {
+  display: grid;
+  width: 66%;
+  align-items: center;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  margin-bottom: 6px;
+  color: var(--gold);
+}
+
+.ornament span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+
+.ornament span:last-child {
+  background: linear-gradient(90deg, currentColor, transparent);
+}
+
+.ornament b {
+  font-size: 8px;
+}
+
+.couple {
+  color: var(--wine);
+  font-family: "Invitation Nastaliq", serif;
+}
+
+.couple p {
+  margin: 0;
+  font-size: clamp(56px, 17vw, 80px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.couple i {
+  display: block;
+  margin: -8px 0 -3px;
+  color: var(--gold);
+  font-size: 23px;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+.invitation-copy {
+  margin: 6px 0 8px;
+  color: #5f4a43;
+  font-size: clamp(12px, 3.2vw, 16px);
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.date-block {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  color: var(--wine-deep);
+}
+
+.date-number,
+.date-year {
+  font-size: clamp(21px, 5vw, 29px);
+  font-weight: 600;
+}
+
+.date-month {
+  color: var(--gold);
+  font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(21px, 5.5vw, 31px);
+  font-weight: 600;
+}
+
+.reception {
+  margin: 9px 0;
+  color: #65534b;
+  font-size: clamp(13px, 3.4vw, 16px);
+}
+
+.location {
+  position: relative;
+  width: 90%;
+  padding: 12px 7px 7px;
+  border-radius: 12px;
+  background: rgba(255, 250, 241, 0.56);
+  backdrop-filter: blur(2px);
+}
+
+.location::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 26px;
+  height: 1px;
+  background: var(--gold);
+  content: "";
+  transform: translateX(-50%);
+}
+
+.venue {
+  margin: 0 0 5px;
+  color: var(--wine);
+  font-size: clamp(17px, 4vw, 21px);
+  font-weight: 600;
+}
+
+.address {
+  margin: 0;
+  padding: 5px 6px;
+  border-radius: 6px;
+  background: rgba(255, 250, 241, 0.88);
+  color: var(--ink);
+  font-size: clamp(12px, 3.2vw, 15px);
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+.families {
+  margin: 0 0 10px;
+  color: var(--wine);
+  font-family: "Invitation Nastaliq", serif;
+  font-size: clamp(35px, 10vw, 46px);
+  line-height: 1.5;
+}
+
+.ceremony {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(12px, 3.25vw, 15px);
+  line-height: 2;
+}
+
+.soundless-note,
+.accessible-copy {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.invitation-controls {
+  position: absolute;
+  z-index: 12;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  transform: translateX(-50%);
+}
+
+.replay,
+.music-toggle {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 238, 211, 0.3);
+  border-radius: 999px;
+  background: rgba(24, 47, 33, 0.76);
+  color: #fff0da;
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 400ms ease, transform 400ms ease;
+  backdrop-filter: blur(8px);
+}
+
+.music-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.music-toggle[hidden],
+.replay[hidden] {
+  display: none;
+}
+
+.music-symbol {
+  color: #e7c991;
+  font-size: 19px;
+}
+
+.music-toggle:disabled {
+  opacity: .6;
+}
+
+.experience.is-opening .music-toggle {
+  opacity: 1;
+  transform: none;
+}
+
+.experience.is-opening .envelope-flap {
+  z-index: 2;
+  transform: rotateX(180deg);
+}
+
+.experience.is-opening .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.55);
+}
+
+.experience.is-opening .letter-preview {
+  z-index: 3;
+  box-shadow: 0 22px 34px rgba(24, 43, 29, 0.28);
+  transform: translateY(-64%);
+}
+
+.experience.is-revealed .opening {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24vh) scale(.82);
+}
+
+.experience.is-revealed .invitation-card {
+  z-index: 10;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.experience.is-revealed .replay {
+  opacity: 1;
+  transform: none;
+}
+
+.petal {
+  position: absolute;
+  z-index: 9;
+  top: -12vh;
+  width: var(--size);
+  height: calc(var(--size) * .58);
+  border-radius: 85% 12% 78% 18%;
+  background: var(--petal-color);
+  opacity: 0;
+  pointer-events: none;
+  animation: petal-fall var(--duration) linear var(--delay) forwards;
+  transform: translate3d(0, -10vh, 0) rotate(0deg);
+}
+
+@keyframes petal-fall {
+  0% { opacity: 0; transform: translate3d(0, -10vh, 0) rotate(0deg); }
+  12% { opacity: .72; }
+  100% { opacity: 0; transform: translate3d(var(--drift), 112vh, 0) rotate(var(--spin)); }
+}
+
+@media (max-height: 680px) {
+  .opening-kicker { margin-bottom: 34px; }
+  .open-label { margin-top: 34px; }
+  .poem { margin: 10px 0 4px; }
+  .invitation-copy { margin: 4px 0 7px; line-height: 1.65; }
+  .reception { margin-bottom: 7px; }
+}
+
+@media (min-width: 760px) {
+  .invitation-card {
+    width: min(410px, 74vw, calc((100svh - 112px) * .62));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .petals {
+    display: none;
+  }
+}

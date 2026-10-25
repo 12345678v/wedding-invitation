@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#183529">
+  <meta name="description" content="دعوت‌نامه عروسی وحید فرجی و مهدیه شجری">
+  <title>دعوت‌نامه عروسی وحید و مهدیه</title>
+  <link rel="preload" href="reference-lettering.jpg" as="image">
+  <link rel="stylesheet" href="styles.css?v=green-theme-7">
+</head>
+<body>
+  <main class="experience" id="experience">
+    <svg class="lettering-filters" aria-hidden="true" width="0" height="0" focusable="false">
+      <defs>
+        <filter id="fine-lettering" color-interpolation-filters="sRGB">
+          <feMorphology in="SourceGraphic" operator="dilate" radius="0.16"></feMorphology>
+          <feComponentTransfer>
+            <feFuncR type="linear" slope="0.86" intercept="0.14"></feFuncR>
+            <feFuncG type="linear" slope="0.86" intercept="0.14"></feFuncG>
+            <feFuncB type="linear" slope="0.86" intercept="0.14"></feFuncB>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+    <div class="ambient-glow" aria-hidden="true"></div>
+    <div class="petals" id="petals" aria-hidden="true"></div>
+
+    <section class="opening" id="opening" aria-label="پاکت دعوت‌نامه">
+      <p class="opening-kicker">دعوت‌نامه عروسی</p>
+
+      <button class="envelope-trigger" id="openButton" type="button" aria-expanded="false" aria-controls="invitationCard">
+        <span class="envelope" aria-hidden="true">
+          <span class="envelope-shadow"></span>
+          <span class="envelope-back"></span>
+          <span class="letter-preview"></span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-pocket-left"></span>
+          <span class="envelope-pocket-right"></span>
+          <span class="envelope-pocket-bottom"></span>
+          <span class="wax-seal"><img src="gold-wax-seal.png" alt="" width="1280" height="1280" draggable="false"></span>
+        </span>
+        <span class="open-label">
+          <span class="open-label-main">برای باز کردن دعوت‌نامه لمس کنید</span>
+          <span class="open-label-sub">یک لحظه تا شروع قصه‌ی ما</span>
+        </span>
+      </button>
+    </section>
+
+    <article class="invitation-card" id="invitationCard" aria-hidden="true" aria-label="متن دعوت‌نامه عروسی مهدیه و وحید" tabindex="-1">
+      <div class="card-inner" aria-hidden="true">
+        <div class="lettering-window">
+          <div class="lettering-slice lettering-names">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+          <div class="lettering-slice lettering-poem">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+          <div class="lettering-slice lettering-families">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+          <div class="lettering-slice lettering-ceremony lettering-fine">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+          <div class="lettering-slice lettering-reception lettering-fine">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+          <div class="lettering-slice lettering-address lettering-fine">
+            <img class="reference-lettering" src="reference-lettering.jpg" alt="" width="640" height="1280" draggable="false">
+          </div>
+        </div>
+      </div>
+      <div class="accessible-copy">
+        <div class="couple">
+          <p>مهدیه و وحید</p>
+        </div>
+
+        <p class="poem">و ما بهاری در میان پاییزیم</p>
+        <p class="families">شجری - فرجی</p>
+        <p class="ceremony">چهارشنبه <bdi dir="ltr">۱۴۰۵/۸/۲۷</bdi> از ساعت ۱۸ الی ۲۲</p>
+        <p class="reception">بصرف شیرینی و شام</p>
+        <p class="address">شهریار، میدان بسیج، بلوار محرابی، کوچه گلخانه، عمارت بلور</p>
+      </div>
+    </article>
+
+    <div class="invitation-controls">
+      <button class="replay" id="replayButton" type="button" hidden>دوباره ببینید</button>
+      <button class="music-toggle" id="musicButton" type="button" aria-pressed="false" hidden>
+        <span class="music-symbol" aria-hidden="true">♫</span>
+        <span id="musicLabel">پخش موسیقی</span>
+      </button>
+    </div>
+    <audio id="weddingMusic" preload="auto"></audio>
+
+    <div class="soundless-note" id="status" aria-live="polite"></div>
+  </main>
+
+  <script src="music-data.js?v=embedded-1"></script>
+  <script src="script.js?v=green-petals-4"></script>
+</body>
+</html>
